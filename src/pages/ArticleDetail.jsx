@@ -1,69 +1,70 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { articlesData } from '../data/articlesData';
+import { newsData } from '../data/newsData';
 
 const ArticleDetail = () => {
   const { id } = useParams();
 
+  // Busca en ambas fuentes (artículos o noticias)
+  const allContent = [...articlesData, ...newsData];
+  const item = allContent.find((entry) => String(entry.id) === String(id));
+
+  if (!item) {
+    return (
+      <div className="p-8 max-w-4xl mx-auto text-center space-y-4">
+        <h1 className="text-2xl font-bold text-white">Publicación no encontrada ⚠️</h1>
+        <p className="text-slate-400 text-sm">El contenido solicitado no existe o el enlace es incorrecto.</p>
+        <Link to="/noticias" className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all">
+          Volver a Noticias
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <article className="max-w-4xl mx-auto p-6 sm:p-8 space-y-8 text-slate-300">
-      {/* Botón Volver */}
-      <Link to="/" className="text-xs text-slate-400 hover:text-white transition-colors inline-block">
-        ← Volver a Noticias
+    <article className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto space-y-6">
+      <Link to={-1} className="inline-flex items-center gap-2 text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors">
+        ← Volver
       </Link>
 
-      {/* Encabezado de la Noticia */}
-      <header className="space-y-4">
-        <div className="flex items-center gap-3">
-          <span className="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
-            Noticia Principal #{id || '1'}
+      <div className="space-y-3">
+        <div className="flex items-center gap-3 text-xs">
+          <span className="font-bold text-indigo-400 uppercase tracking-widest bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
+            {item.category}
           </span>
-          <span className="text-xs text-slate-500">Publicado el 23 de Julio, 2026</span>
+          <span className="text-slate-500">• {item.date || item.timeAgo}</span>
+          {item.readTime && <span className="text-slate-500">• {item.readTime}</span>}
         </div>
-        <h1 className="text-3xl sm:text-5xl font-black text-white leading-tight">
-          La Convergencia de la Estética Digital: Redefiniendo el Periodismo Libre
+
+        <h1 className="text-2xl sm:text-4xl font-black text-white leading-tight">
+          {item.title}
         </h1>
-        <p className="text-slate-400 text-lg leading-relaxed">
-          Un análisis exhaustivo sobre los límites de la tecnología y la creatividad humana en el panorama audiovisual contemporáneo.
-        </p>
-      </header>
 
-      {/* Imagen Principal */}
-      <div className="h-80 sm:h-[450px] w-full rounded-3xl overflow-hidden bg-slate-800 border border-slate-800">
-        <img
-          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
-          alt="Detalle de Noticia"
-          className="w-full h-full object-cover"
-        />
+        {item.author && (
+          <p className="text-xs text-slate-400 border-b border-slate-800 pb-4">
+            Por <strong className="text-slate-200">{item.author}</strong>
+          </p>
+        )}
       </div>
 
-      {/* Cuerpo del Artículo */}
-      <div className="space-y-6 text-base leading-relaxed text-slate-300">
-        <p>
-          A medida que las fronteras entre el contenido multimedia y las transmisiones digitales continúan disolviéndose, nos encontramos ante un momento crucial en la historia de la comunicación.
-        </p>
-        <p className="bg-[#121723] border-l-4 border-indigo-500 p-4 rounded-r-xl text-slate-200 italic">
-          "Antena Libre busca ser la ventana desde la cual se analizan estos fenómenos con total independencia periodística."
-        </p>
-        <p>
-          Con el avance de nuevas herramientas de edición y transmisión en vivo, los comunicadores independientes ahora cuentan con las mismas capacidades de producción que las grandes cadenas de noticias tradicionalmente monopolizaban.
-        </p>
-      </div>
-
-      {/* Tarjeta del Autor / Sobre Mí */}
-      <section className="bg-[#121723] border border-slate-800 rounded-3xl p-6 flex items-center gap-6 mt-12">
-        <img
-          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
-          alt="Autor"
-          className="w-16 h-16 rounded-full object-cover border-2 border-indigo-500/40"
-        />
-        <div>
-          <h3 className="text-white font-bold text-base">Escrito por Miguel Romero</h3>
-          <p className="text-xs text-slate-400">Director & Fundador de Antena Libre.</p>
-          <Link to="/nosotros" className="text-indigo-400 hover:underline text-xs font-semibold mt-1 inline-block">
-            Conoce más sobre el equipo →
-          </Link>
+      {item.image && (
+        <div className="rounded-2xl overflow-hidden border border-slate-800 max-h-96">
+          <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
         </div>
-      </section>
+      )}
+
+      {(item.summary || item.description) && (
+        <p className="text-slate-200 text-sm sm:text-base font-semibold leading-relaxed border-l-2 border-indigo-500 pl-4 py-1 italic bg-indigo-500/5 rounded-r-xl">
+          {item.summary || item.description}
+        </p>
+      )}
+
+      <div className="text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 pt-2">
+        {item.content && item.content.map((paragraph, idx) => (
+          <p key={idx}>{paragraph}</p>
+        ))}
+      </div>
     </article>
   );
 };

@@ -1,50 +1,53 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Layout
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import NewPostModal from './components/modals/NewPostModal';
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
-// Páginas
-import Home from './pages/Home';
-import News from './pages/News';
-import ArticleDetail from './pages/ArticleDetail';
-import VideoGallery from './pages/VideoGallery';
-import VideoDetail from './pages/VideoDetail'; // <-- ¡Verifica esta importación!
-import Articles from './pages/Articles';
-import AboutUs from './pages/AboutUs';
+import Home from "./pages/Home";
+import News from "./pages/News";
+import Articles from "./pages/Articles";
+import ArticleDetail from "./pages/ArticleDetail";
+import VideoGallery from "./pages/VideoGallery";
+import VideoDetail from "./pages/VideoDetail";
+import AudioGallery from "./pages/AudioGallery";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <Router>
-      <div className="min-h-screen bg-[#0a0d14] text-slate-100 flex flex-col font-sans">
-        <Navbar onOpenModal={() => setIsModalOpen(true)} />
+      <div className="min-h-screen bg-[#0b0e14] text-slate-100 flex flex-col justify-between font-sans">
+        <Navbar />
 
-        <main className="flex-1 bg-[#0a0d14]">
+        <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+
+            {/* NOTICIAS */}
             <Route path="/noticias" element={<News />} />
+            <Route path="/noticias/:id" element={<ArticleDetail />} />
             <Route path="/noticia/:id" element={<ArticleDetail />} />
+
+            {/* ARTÍCULOS */}
             <Route path="/articulos" element={<Articles />} />
+            <Route path="/articulos/:id" element={<ArticleDetail />} />
+            <Route path="/articulo/:id" element={<ArticleDetail />} />
+
+            {/* VÍDEOS  */}
             <Route path="/videos" element={<VideoGallery />} />
-            {/* RUTA CLAVE PARA QUE RENDERICE /video/2 */}
+            <Route path="/videos/:id" element={<VideoDetail />} />
             <Route path="/video/:id" element={<VideoDetail />} />
+
+            {/* AUDIOS Y NOSOTROS */}
+            <Route path="/audios" element={<AudioGallery />} />
             <Route path="/nosotros" element={<AboutUs />} />
           </Routes>
         </main>
 
         <Footer />
-
-        <NewPostModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
       </div>
     </Router>
   );
 }
 
-export default App;
+export default App;  

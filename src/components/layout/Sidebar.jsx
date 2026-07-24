@@ -10,7 +10,7 @@ const Sidebar = ({ onOpenModal }) => {
     }`;
 
   return (
-    <aside className="w-64 bg-[#0d111a] text-slate-300 flex flex-col justify-between p-6 border-r border-slate-800/80 shrink-0 hidden md:flex min-h-[calc(100vh-65px)]">
+    <aside className="w-64 bg-[#0d111a] text-slate-300 flex flex-col justify-between p-6 border-r border-slate-800/80 shrink-0 md:flex min-h-[calc(100vh-65px)]">
       <div className="space-y-6">
         <div>
           <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Navegación</h2>

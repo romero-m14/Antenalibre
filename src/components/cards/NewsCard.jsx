@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NewsCard = ({ id, title, category, date, image, description, isFeatured = false }) => {
-  // Si la noticia es destacada (ocupará más espacio en la cuadrícula)
   if (isFeatured) {
     return (
       <Link
@@ -42,7 +41,6 @@ const NewsCard = ({ id, title, category, date, image, description, isFeatured = 
     );
   }
 
-  // Tarjeta de noticia estándar
   return (
     <Link
       to={`/noticia/${id}`}
