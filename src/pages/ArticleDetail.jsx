@@ -5,8 +5,6 @@ import { newsData } from '../data/newsData';
 
 const ArticleDetail = () => {
   const { id } = useParams();
-
-  // Busca en ambas fuentes (artículos o noticias)
   const allContent = [...articlesData, ...newsData];
   const item = allContent.find((entry) => String(entry.id) === String(id));
 

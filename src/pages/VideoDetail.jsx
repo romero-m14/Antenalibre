@@ -58,6 +58,7 @@ const VideoDetail = () => {
           <p key={idx}>{paragraph}</p>
         ))}
       </div>
+      
     </article>
   );
 };

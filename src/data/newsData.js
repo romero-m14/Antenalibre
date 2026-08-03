@@ -1,5 +1,3 @@
-// src/data/newsData.js
-
 export const newsData = [
   {
     id: "not-1",

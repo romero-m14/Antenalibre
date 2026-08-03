@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import Transmisor from "./components/Transmisor"; // 👈 Importamos el transmisor de voz
 
 import Home from "./pages/Home";
 import News from "./pages/News";
@@ -41,6 +42,16 @@ function App() {
             {/* AUDIOS Y NOSOTROS */}
             <Route path="/audios" element={<AudioGallery />} />
             <Route path="/nosotros" element={<AboutUs />} />
+
+            {/* 🔴 CABINA DE TRANSMISIÓN (Para hablar en vivo por micrófono) */}
+            <Route 
+              path="/estudio" 
+              element={
+                <div className="p-8 max-w-md mx-auto flex justify-center items-center min-h-[60vh]">
+                  <Transmisor />
+                </div>
+              } 
+            />
           </Routes>
         </main>
 
@@ -50,4 +61,4 @@ function App() {
   );
 }
 
-export default App;  
+export default App;

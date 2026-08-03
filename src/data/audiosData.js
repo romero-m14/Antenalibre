@@ -1,7 +1,7 @@
 export const liveStreamData = {
   isLive: true, 
   title: "Antena Libre Radio 24/7",
-  badge: "SEÑAL EN DIRECTO",
+  badge: "RADIO YA NO EN DIRECTO",
   description: "Sintoniza nuestra transmisión en tiempo real y programas en directo.",
   streamUrl: "https://stream.zeno.fm/f3wvbbqmdg8uv"
 };

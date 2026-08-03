@@ -59,7 +59,7 @@ const Navbar = () => {
           <div className="relative hidden lg:block">
             <input
               type="text"
-              placeholder="Buscar en el archivo..."
+              placeholder="Buscar tu noticia..."
               className="bg-[#171d2c] text-xs text-slate-200 placeholder-slate-500 px-4 py-2 rounded-xl border border-slate-700/50 focus:outline-none focus:border-indigo-500 w-48 xl:w-56 transition-all"
             />
           </div>
@@ -74,7 +74,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Menú Desplegable en Celulares */}
       {isMenuOpen && (
         <nav className="md:hidden border-t border-slate-800/80 bg-[#0d111a] px-4 py-3 flex flex-col gap-2">
           <NavLink

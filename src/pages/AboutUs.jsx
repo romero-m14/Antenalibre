@@ -36,7 +36,7 @@ const AboutUs = () => {
             {/* botones */}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=100077501584106"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#1877F2]/20 hover:bg-[#1877F2] text-[#1877F2] hover:text-white border border-[#1877F2]/40 text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-md flex items-center gap-2"
